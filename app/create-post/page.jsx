@@ -93,7 +93,7 @@ export default function CreatePost() {
               fontSize: "14px",
             }}
           >
-            ← Back to Feed
+            ← FYP рүү буцах
           </button>
         </Link>
         <div
@@ -112,7 +112,7 @@ export default function CreatePost() {
               marginBottom: "24px",
             }}
           >
-            Create a Post
+            Пост үүсгэх
           </h1>
           <form onSubmit={handleSubmit}>
             <div style={{ marginBottom: "20px" }}>
@@ -126,7 +126,7 @@ export default function CreatePost() {
                   textTransform: "uppercase",
                 }}
               >
-                Choose a Subreddit
+                Сэдэв сонгох
               </label>
               <select
                 value={subreddit}
@@ -160,13 +160,13 @@ export default function CreatePost() {
                   textTransform: "uppercase",
                 }}
               >
-                Title
+                Гарчиг
               </label>
               <input
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="Enter post title"
+                placeholder="Гарчиг оруулна уу"
                 style={{
                   width: "100%",
                   padding: "12px",
@@ -190,12 +190,12 @@ export default function CreatePost() {
                   textTransform: "uppercase",
                 }}
               >
-                Content
+                Агуулга
               </label>
               <textarea
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
-                placeholder="What's on your mind?"
+                placeholder="Юу бодож байна?"
                 style={{
                   width: "100%",
                   padding: "12px",
@@ -227,7 +227,7 @@ export default function CreatePost() {
                   fontWeight: "600",
                 }}
               >
-                {loading ? "Creating..." : "Create Post"}
+                {loading ? "Үүсгэж байна..." : "Пост үүсгэх"}
               </button>
               <Link href="/" style={{ textDecoration: "none" }}>
                 <button
@@ -243,7 +243,7 @@ export default function CreatePost() {
                     fontSize: "14px",
                   }}
                 >
-                  Cancel
+                  Болих
                 </button>
               </Link>
             </div>

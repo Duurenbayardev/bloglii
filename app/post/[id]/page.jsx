@@ -12,6 +12,7 @@ export default function PostDetail() {
     const [commentContent, setCommentContent] = useState("");
     const [loading, setLoading] = useState(true);
     const [submitting, setSubmitting] = useState(false);
+    const [theme, setTheme] = useState("dark");
 
     useEffect(() => {
         const user = localStorage.getItem("currentUser");
@@ -31,6 +32,19 @@ export default function PostDetail() {
         }
     }, [router]);
 
+    useEffect(() => {
+        if (typeof window === "undefined") return;
+        const saved = localStorage.getItem("theme");
+        const initial = saved === "light" ? "light" : "dark";
+        setTheme(initial);
+        document.body.classList.toggle("light-mode", initial === "light");
+    }, []);
+
+    useEffect(() => {
+        if (typeof window === "undefined") return;
+        document.body.classList.toggle("light-mode", theme === "light");
+        localStorage.setItem("theme", theme);
+    }, [theme]);
     useEffect(() => {
         if (currentUser && params?.id) {
             fetchPost();
@@ -130,7 +144,7 @@ export default function PostDetail() {
                     padding: "40px",
                 }}
             >
-                Loading post...
+                Пост ачааллаж байна...
             </div>
         );
     if (!post)
@@ -142,7 +156,7 @@ export default function PostDetail() {
                     padding: "40px",
                 }}
             >
-                Post not found
+                Пост олдсонгүй
             </div>
         );
 
@@ -150,7 +164,7 @@ export default function PostDetail() {
         <div className="app-shell">
             <div className="app-sidebar">
                 <div style={{ color: "#818384", fontSize: "12px" }}>
-                    <p style={{ marginBottom: "8px" }}>Logged in as</p>
+                    <p style={{ marginBottom: "8px" }}>Нэвтэрсэн хэрэглэгч</p>
                     <p
                         style={{
                             color: "#d7dadc",
@@ -174,11 +188,29 @@ export default function PostDetail() {
                                 fontSize: "14px",
                             }}
                         >
-                            ← Back to Feed
+                            ← Лент рүү буцах
                         </button>
                     </Link>
 
                 </div>
+                <button
+                    onClick={() =>
+                        setTheme((t) => (t === "dark" ? "light" : "dark"))
+                    }
+                    style={{
+                        width: "100%",
+                        padding: "8px 12px",
+                        marginTop: "10px",
+                        background: theme === "light" ? "#4b5563" : "#111827",
+                        color: "#f9fafb",
+                        border: "1px solid #4b5563",
+                        borderRadius: "20px",
+                        cursor: "pointer",
+                        fontSize: "13px",
+                    }}
+                >
+                    {theme === "light" ? "Харанхуй горим" : "Гэрэлтэй горим"}
+                </button>
             </div>
             <div className="app-main">
                 <div style={{ maxWidth: "800px", margin: "0 auto" }}>
@@ -246,7 +278,7 @@ export default function PostDetail() {
                                     marginBottom: "8px",
                                 }}
                             >
-                                r/{post.subreddit} • Posted by u/
+                                r/{post.subreddit} • Нийтэлсэн: u/
                                 {post.author?.username}
                             </div>
                             <h1
@@ -314,7 +346,7 @@ export default function PostDetail() {
                                 marginBottom: "12px",
                             }}
                         >
-                            Add a Comment
+                            Сэтгэгдэл нэмэх
                         </h2>
                         <form
                             onSubmit={handleAddComment}
@@ -329,7 +361,7 @@ export default function PostDetail() {
                                 onChange={(e) =>
                                     setCommentContent(e.target.value)
                                 }
-                                placeholder="What are your thoughts?"
+                                placeholder="Юу гэж бодож байна?"
                                 style={{
                                     width: "100%",
                                     padding: "12px",
@@ -361,7 +393,9 @@ export default function PostDetail() {
                                     alignSelf: "flex-start",
                                 }}
                             >
-                                {submitting ? "Posting..." : "Post Comment"}
+                                {submitting
+                                    ? "Илгээж байна..."
+                                    : "Сэтгэгдэл илгээх"}
                             </button>
                         </form>
                     </div>
@@ -374,7 +408,7 @@ export default function PostDetail() {
                                 marginBottom: "12px",
                             }}
                         >
-                            Comments
+                            Сэтгэгдлүүд
                         </h2>
                         {post.comments && post.comments.length > 0 ? (
                             post.comments.map((comment, idx) => (
@@ -415,7 +449,7 @@ export default function PostDetail() {
                                     fontSize: "14px",
                                 }}
                             >
-                                No comments yet
+                                Сэтгэгдэл алга
                             </div>
                         )}
                     </div>

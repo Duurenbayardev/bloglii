@@ -19,17 +19,17 @@ export default function LoginPage() {
     const normalized = rawName.toLowerCase();
 
     if (!rawName) {
-      setError("Enter a username");
+      setError("Нэрээ оруулна уу");
       return;
     }
 
     if (!allowedUsers.includes(normalized)) {
-      setError("Unknown user. Please try again.");
+      setError("Ийм хэрэглэгч алга. Дахин оролдоорой.");
       return;
     }
 
     if (normalized === "duuree" && password !== "ceo123") {
-      setError("Incorrect password for duuree.");
+      setError("Duuree-н нууц үг буруу байна.");
       return;
     }
 
@@ -72,7 +72,7 @@ export default function LoginPage() {
             color: "#e5e7eb",
           }}
         >
-          Surii Discussions
+          Suriildaa gsh
         </h1>
         <p
           style={{
@@ -81,7 +81,7 @@ export default function LoginPage() {
             fontSize: "14px",
           }}
         >
-          Нэрээ бич. <strong>Заваан амьтан минь.</strong>.
+          Нэрээ бичээд нэвтэр.
         </p>
 
         <form onSubmit={handleLogin} style={{ textAlign: "left" }}>
@@ -95,13 +95,13 @@ export default function LoginPage() {
                 marginBottom: "6px",
               }}
             >
-              Username
+              Хэрэглэгчийн нэр
             </label>
             <input
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="Нэрээ оруулна уу"
+              placeholder="zuger nree bich(medku bol dureges asuu)"
               style={{
                 width: "100%",
                 padding: "10px 12px",
@@ -127,13 +127,13 @@ export default function LoginPage() {
                   marginBottom: "6px",
                 }}
               >
-                Password ()
+                Нууц үг (зөвхөн duuree)
               </label>
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Та захирал биш бол Код шаардлагагүй."
+                placeholder="Зөвхөн захирал дуурээ-д хэрэгтэй."
                 style={{
                   width: "100%",
                   padding: "10px 12px",
@@ -177,7 +177,7 @@ export default function LoginPage() {
               marginTop: "8px",
             }}
           >
-            {loading ? "Logging in..." : "Login"}
+            {loading ? "Нэвтэрч байна..." : "Нэвтрэх"}
           </button>
         </form>
       </div>

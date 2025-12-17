@@ -12,6 +12,7 @@ export default function Feed() {
   const [selectedSubreddit, setSelectedSubreddit] = useState(null);
   const [loading, setLoading] = useState(true);
   const [subMenuOpen, setSubMenuOpen] = useState(false);
+  const [theme, setTheme] = useState("dark");
 
   useEffect(() => {
     const user = localStorage.getItem("currentUser");
@@ -30,6 +31,20 @@ export default function Feed() {
       router.push("/login");
     }
   }, [router]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const saved = localStorage.getItem("theme");
+    const initial = saved === "light" ? "light" : "dark";
+    setTheme(initial);
+    document.body.classList.toggle("light-mode", initial === "light");
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    document.body.classList.toggle("light-mode", theme === "light");
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   useEffect(() => {
     if (currentUser) {
@@ -116,7 +131,7 @@ export default function Feed() {
             }}
           >
             <span style={{ textTransform: "uppercase", letterSpacing: 0.5 }}>
-              Subreddits
+              Сэдвүүд
             </span>
             <span style={{ fontSize: "16px" }}>{subMenuOpen ? "▴" : "▾"}</span>
           </button>
@@ -138,7 +153,7 @@ export default function Feed() {
                 fontSize: "14px",
               }}
             >
-              All Posts
+              Бүх пост
             </button>
             {subreddits.map((sub) => (
               <button
@@ -184,7 +199,7 @@ export default function Feed() {
                 fontWeight: "600",
               }}
             >
-              Create Subreddit
+              Сэдэв үүсгэх
             </button>
           </Link>
         </div>
@@ -202,7 +217,7 @@ export default function Feed() {
               marginBottom: "12px",
             }}
           >
-            Logged in as
+            Нэвтэрсэн хэрэглэгч
           </p>
           <p
             style={{
@@ -227,7 +242,7 @@ export default function Feed() {
               fontSize: "14px",
             }}
           >
-            Logout
+            Гарах
           </button>
         </div>
       </div>
@@ -270,7 +285,7 @@ export default function Feed() {
                   cursor: "pointer",
                 }}
               >
-                Create a post
+                Пост бичих
               </div>
             </div>
           </Link>
@@ -282,7 +297,7 @@ export default function Feed() {
                 padding: "40px",
               }}
             >
-              Loading posts...
+              Постууд ачааллаж байна...
             </div>
           ) : posts.length === 0 ? (
             <div
@@ -292,7 +307,7 @@ export default function Feed() {
                 padding: "40px",
               }}
             >
-              No posts yet
+              Пост одоогоор алга
             </div>
           ) : (
             posts.map((post) => (
@@ -378,7 +393,7 @@ export default function Feed() {
                         marginBottom: "4px",
                       }}
                     >
-                      r/{post.subreddit} • Posted by u/
+                      r/{post.subreddit} • Нийтэлсэн: u/
                       {post.author?.username}
                     </div>
                     <h3
@@ -407,7 +422,7 @@ export default function Feed() {
                         color: "#9ca3af",
                       }}
                     >
-                      {post.comments?.length || 0} Comments
+                      {post.comments?.length || 0} сэтгэгдэл
                     </div>
                   </div>
                 </div>

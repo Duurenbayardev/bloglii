@@ -79,7 +79,7 @@ export default function CreateSubreddit() {
               fontSize: "14px",
             }}
           >
-            ← Back to Feed
+            ← Лент рүү буцах
           </button>
         </Link>
         <div
@@ -98,7 +98,7 @@ export default function CreateSubreddit() {
               marginBottom: "8px",
             }}
           >
-            Create a Community
+            Сэдэв үүсгэх
           </h1>
           <p
             style={{
@@ -107,7 +107,7 @@ export default function CreateSubreddit() {
               marginBottom: "32px",
             }}
           >
-            Start a new community to discuss topics with your team
+            Багаараа ярилцах шинэ сэдэв үүсгэх.
           </p>
           <form onSubmit={handleSubmit}>
             <div style={{ marginBottom: "24px" }}>
@@ -121,7 +121,7 @@ export default function CreateSubreddit() {
                   textTransform: "uppercase",
                 }}
               >
-                Community Name
+                Сэдвийн нэр
               </label>
               <div style={{ display: "flex", alignItems: "center" }}>
                 <span
@@ -137,7 +137,7 @@ export default function CreateSubreddit() {
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="mycommunity"
+                  placeholder="ж: surii"
                   style={{
                     flex: 1,
                     padding: "12px",
@@ -157,7 +157,7 @@ export default function CreateSubreddit() {
                   marginTop: "8px",
                 }}
               >
-                Community names are lowercase and cannot contain spaces
+                Нэр нь жижиг үсэгтэй, хоосон зайгүй байна.
               </p>
             </div>
             <div style={{ marginBottom: "24px" }}>
@@ -171,12 +171,12 @@ export default function CreateSubreddit() {
                   textTransform: "uppercase",
                 }}
               >
-                Description (Optional)
+                Тайлбар (заавал биш)
               </label>
               <textarea
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                placeholder="What is your community about?"
+                placeholder="Энэ сабреддит юуг тухай байгааг бич."
                 style={{
                   width: "100%",
                   padding: "12px",
@@ -208,7 +208,7 @@ export default function CreateSubreddit() {
                   fontWeight: "600",
                 }}
               >
-                {loading ? "Creating..." : "Create Community"}
+                {loading ? "Үүсгэж байна..." : "Сабреддит үүсгэх"}
               </button>
               <Link href="/" style={{ textDecoration: "none" }}>
                 <button
@@ -224,7 +224,7 @@ export default function CreateSubreddit() {
                     fontSize: "14px",
                   }}
                 >
-                  Cancel
+                  Болих
                 </button>
               </Link>
             </div>

@@ -26,6 +26,24 @@
     padding: 16px;
 }
 
+body.light-mode {
+    background: #f3f4f6;
+    color: #020617;
+}
+
+body.light-mode .app-shell {
+    background: #e5e7eb;
+}
+
+body.light-mode .app-sidebar {
+    background: #f9fafb;
+    border-right-color: #e5e7eb;
+}
+
+body.light-mode .app-main {
+    background: #f9fafb;
+}
+
 @media (max-width: 768px) {
     .app-shell {
         flex-direction: column;
