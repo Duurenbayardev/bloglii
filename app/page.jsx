@@ -11,6 +11,7 @@ export default function Feed() {
   const [subreddits, setSubreddits] = useState([]);
   const [selectedSubreddit, setSelectedSubreddit] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [subMenuOpen, setSubMenuOpen] = useState(false);
 
   useEffect(() => {
     const user = localStorage.getItem("currentUser");
@@ -97,45 +98,38 @@ export default function Feed() {
   return (
     <div className="app-shell">
       <div className="app-sidebar">
-        <div style={{ marginBottom: "24px" }}>
-          <h2
-            style={{
-              color: "#818384",
-              fontSize: "12px",
-              fontWeight: "700",
-              textTransform: "uppercase",
-              marginBottom: "12px",
-            }}
-          >
-            Subreddits
-          </h2>
+        <div style={{ marginBottom: "16px" }}>
           <button
-            onClick={() => setSelectedSubreddit(null)}
+            onClick={() => setSubMenuOpen((open) => !open)}
             style={{
               width: "100%",
               padding: "8px 12px",
-              background: !selectedSubreddit ? "#272729" : "transparent",
-              color: "#818384",
-              border: "none",
-              borderRadius: "20px",
+              background: "#050816",
+              color: "#f3f4f6",
+              border: "1px solid #272443",
+              borderRadius: "999px",
               cursor: "pointer",
-              marginBottom: "8px",
-              textAlign: "left",
-              fontSize: "14px",
+              fontSize: "13px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
             }}
           >
-            All Posts
+            <span style={{ textTransform: "uppercase", letterSpacing: 0.5 }}>
+              Subreddits
+            </span>
+            <span style={{ fontSize: "16px" }}>{subMenuOpen ? "▴" : "▾"}</span>
           </button>
-          {subreddits.map((sub) => (
+        </div>
+        {subMenuOpen && (
+          <div style={{ marginBottom: "24px" }}>
             <button
-              key={sub._id}
-              onClick={() => setSelectedSubreddit(sub.name)}
+              onClick={() => setSelectedSubreddit(null)}
               style={{
                 width: "100%",
                 padding: "8px 12px",
-                background:
-                  selectedSubreddit === sub.name ? "#272729" : "transparent",
-                color: "#818384",
+                background: !selectedSubreddit ? "#111827" : "transparent",
+                color: "#e5e7eb",
                 border: "none",
                 borderRadius: "20px",
                 cursor: "pointer",
@@ -144,10 +138,31 @@ export default function Feed() {
                 fontSize: "14px",
               }}
             >
-              r/{sub.name}
+              All Posts
             </button>
-          ))}
-        </div>
+            {subreddits.map((sub) => (
+              <button
+                key={sub._id}
+                onClick={() => setSelectedSubreddit(sub.name)}
+                style={{
+                  width: "100%",
+                  padding: "8px 12px",
+                  background:
+                    selectedSubreddit === sub.name ? "#111827" : "transparent",
+                  color: "#e5e7eb",
+                  border: "none",
+                  borderRadius: "20px",
+                  cursor: "pointer",
+                  marginBottom: "8px",
+                  textAlign: "left",
+                  fontSize: "14px",
+                }}
+              >
+                r/{sub.name}
+              </button>
+            ))}
+          </div>
+        )}
         <div
           style={{
             marginBottom: "24px",
@@ -182,7 +197,7 @@ export default function Feed() {
         >
           <p
             style={{
-              color: "#818384",
+              color: "#9ca3af",
               fontSize: "12px",
               marginBottom: "12px",
             }}
@@ -191,7 +206,7 @@ export default function Feed() {
           </p>
           <p
             style={{
-              color: "#d7dadc",
+              color: "#f3f4f6",
               fontSize: "14px",
               fontWeight: "600",
               marginBottom: "12px",
@@ -204,7 +219,7 @@ export default function Feed() {
             style={{
               width: "100%",
               padding: "8px 12px",
-              background: "#818384",
+              background: "#7c3aed",
               color: "white",
               border: "none",
               borderRadius: "20px",
@@ -221,40 +236,42 @@ export default function Feed() {
           <Link href="/create-post" style={{ textDecoration: "none" }}>
             <div
               style={{
-                background: "#1a1a1b",
-                border: "1px solid #343536",
-                borderRadius: "4px",
+                background: "#0b1020",
+                border: "1px solid #312e81",
+                borderRadius: "8px",
                 padding: "16px",
                 marginBottom: "16px",
                 cursor: "pointer",
                 display: "flex",
                 gap: "12px",
                 alignItems: "center",
-                transition: "border-color 0.2s",
+                transition: "border-color 0.2s, background-color 0.2s",
               }}
             >
               <div
                 style={{
                   width: "32px",
                   height: "32px",
-                  background: "#818384",
-                  borderRadius: "50%",
+                  background: "#4f46e5",
+                  borderRadius: "999px",
                 }}
               />
-              <input
+              <div
                 type="text"
                 placeholder="Create a post"
                 disabled
                 style={{
                   flex: 1,
-                  background: "#272729",
-                  border: "none",
-                  color: "#818384",
+                  background: "#020617",
+                  border: "1px solid #272443",
+                  color: "#9ca3af",
                   padding: "8px 12px",
-                  borderRadius: "20px",
+                  borderRadius: "999px",
                   cursor: "pointer",
                 }}
-              />
+              >
+                Create a post
+              </div>
             </div>
           </Link>
           {loading ? (
@@ -286,13 +303,13 @@ export default function Feed() {
               >
                 <div
                   style={{
-                    background: "#1a1a1b",
-                    border: "1px solid #343536",
-                    borderRadius: "4px",
+                    background: "#020617",
+                    border: "1px solid #1f2937",
+                    borderRadius: "8px",
                     marginBottom: "8px",
                     cursor: "pointer",
                     display: "flex",
-                    transition: "background-color 0.2s",
+                    transition: "background-color 0.2s, border-color 0.2s",
                   }}
                 >
                   <div
@@ -301,8 +318,8 @@ export default function Feed() {
                       flexDirection: "column",
                       alignItems: "center",
                       padding: "8px 12px",
-                      background: "#272729",
-                      borderRadius: "4px 0 0 4px",
+                      background: "#050816",
+                      borderRadius: "8px 0 0 8px",
                       minWidth: "40px",
                     }}
                   >
@@ -314,7 +331,7 @@ export default function Feed() {
                       style={{
                         background: "none",
                         border: "none",
-                        color: "#818384",
+                        color: "#a855f7",
                         cursor: "pointer",
                         fontSize: "16px",
                         padding: "4px",
@@ -324,7 +341,7 @@ export default function Feed() {
                     </button>
                     <span
                       style={{
-                        color: "#818384",
+                        color: "#e5e7eb",
                         fontSize: "12px",
                         margin: "4px 0",
                       }}
@@ -339,7 +356,7 @@ export default function Feed() {
                       style={{
                         background: "none",
                         border: "none",
-                        color: "#818384",
+                        color: "#4b5563",
                         cursor: "pointer",
                         fontSize: "16px",
                         padding: "4px",
@@ -357,7 +374,7 @@ export default function Feed() {
                     <div
                       style={{
                         fontSize: "12px",
-                        color: "#818384",
+                        color: "#9ca3af",
                         marginBottom: "4px",
                       }}
                     >
@@ -366,7 +383,7 @@ export default function Feed() {
                     </div>
                     <h3
                       style={{
-                        color: "#d7dadc",
+                        color: "#f9fafb",
                         fontSize: "16px",
                         fontWeight: "600",
                         marginBottom: "8px",
@@ -376,7 +393,7 @@ export default function Feed() {
                     </h3>
                     <p
                       style={{
-                        color: "#818384",
+                        color: "#e5e7eb",
                         fontSize: "14px",
                         marginBottom: "8px",
                         lineHeight: "1.5",
@@ -387,7 +404,7 @@ export default function Feed() {
                     <div
                       style={{
                         fontSize: "12px",
-                        color: "#818384",
+                        color: "#9ca3af",
                       }}
                     >
                       {post.comments?.length || 0} Comments

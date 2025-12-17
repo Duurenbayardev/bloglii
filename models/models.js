@@ -6,7 +6,6 @@ const userSchema = new Schema(
             type: String,
             required: true,
             unique: true,
-            enum: ["EMI", "DUUREE", "MARALA", "CELMOON"],
         },
         avatar: String,
     },

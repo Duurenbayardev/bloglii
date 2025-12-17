@@ -75,7 +75,7 @@ export default function CreatePost() {
     <div
       style={{
         minHeight: "100vh",
-        background: "#030303",
+        background: "#050816",
         padding: "16px",
       }}
     >
@@ -98,15 +98,15 @@ export default function CreatePost() {
         </Link>
         <div
           style={{
-            background: "#1a1a1b",
-            border: "1px solid #343536",
-            borderRadius: "4px",
+            background: "#020617",
+            border: "1px solid #1f2937",
+            borderRadius: "8px",
             padding: "24px",
           }}
         >
           <h1
             style={{
-              color: "#d7dadc",
+              color: "#f9fafb",
               fontSize: "24px",
               fontWeight: "700",
               marginBottom: "24px",
@@ -119,7 +119,7 @@ export default function CreatePost() {
               <label
                 style={{
                   display: "block",
-                  color: "#818384",
+                  color: "#9ca3af",
                   fontSize: "12px",
                   fontWeight: "600",
                   marginBottom: "8px",
@@ -134,10 +134,10 @@ export default function CreatePost() {
                 style={{
                   width: "100%",
                   padding: "12px",
-                  background: "#272729",
-                  color: "#d7dadc",
-                  border: "1px solid #343536",
-                  borderRadius: "4px",
+                  background: "#050816",
+                  color: "#e5e7eb",
+                  border: "1px solid #1f2937",
+                  borderRadius: "6px",
                   fontSize: "14px",
                 }}
               >
@@ -153,7 +153,7 @@ export default function CreatePost() {
               <label
                 style={{
                   display: "block",
-                  color: "#818384",
+                  color: "#9ca3af",
                   fontSize: "12px",
                   fontWeight: "600",
                   marginBottom: "8px",
@@ -170,10 +170,10 @@ export default function CreatePost() {
                 style={{
                   width: "100%",
                   padding: "12px",
-                  background: "#272729",
-                  color: "#d7dadc",
-                  border: "1px solid #343536",
-                  borderRadius: "4px",
+                  background: "#050816",
+                  color: "#e5e7eb",
+                  border: "1px solid #1f2937",
+                  borderRadius: "6px",
                   fontSize: "14px",
                   boxSizing: "border-box",
                 }}
@@ -199,10 +199,10 @@ export default function CreatePost() {
                 style={{
                   width: "100%",
                   padding: "12px",
-                  background: "#272729",
-                  color: "#d7dadc",
-                  border: "1px solid #343536",
-                  borderRadius: "4px",
+                  background: "#050816",
+                  color: "#e5e7eb",
+                  border: "1px solid #1f2937",
+                  borderRadius: "6px",
                   fontSize: "14px",
                   minHeight: "300px",
                   boxSizing: "border-box",
@@ -218,7 +218,7 @@ export default function CreatePost() {
                 style={{
                   flex: 1,
                   padding: "12px",
-                  background: "#818384",
+                  background: "#7c3aed",
                   color: "white",
                   border: "none",
                   borderRadius: "20px",
@@ -235,10 +235,10 @@ export default function CreatePost() {
                   style={{
                     flex: 1,
                     padding: "12px",
-                    background: "#272729",
-                    color: "#d7dadc",
-                    border: "1px solid #343536",
-                    borderRadius: "20px",
+                    background: "transparent",
+                    color: "#e5e7eb",
+                    border: "1px solid #4b5563",
+                    borderRadius: "999px",
                     cursor: "pointer",
                     fontSize: "14px",
                   }}

@@ -7,12 +7,12 @@
 .app-shell {
     display: flex;
     min-height: 100vh;
-    background: #030303;
+    background: #050816;
 }
 
 .app-sidebar {
     width: 280px;
-    background: #1a1a1b;
+    background: #111827;
     border-right: 1px solid #343536;
     padding: 16px;
     overflow-y: auto;

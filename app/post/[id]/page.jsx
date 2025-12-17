@@ -149,23 +149,6 @@ export default function PostDetail() {
     return (
         <div className="app-shell">
             <div className="app-sidebar">
-                <Link href="/" style={{ textDecoration: "none" }}>
-                    <button
-                        style={{
-                            width: "100%",
-                            padding: "8px 12px",
-                            background: "#272729",
-                            color: "#818384",
-                            border: "1px solid #343536",
-                            borderRadius: "4px",
-                            cursor: "pointer",
-                            marginBottom: "24px",
-                            fontSize: "14px",
-                        }}
-                    >
-                        ← Back to Feed
-                    </button>
-                </Link>
                 <div style={{ color: "#818384", fontSize: "12px" }}>
                     <p style={{ marginBottom: "8px" }}>Logged in as</p>
                     <p
@@ -177,33 +160,33 @@ export default function PostDetail() {
                     >
                         u/{currentUser.username}
                     </p>
-                    <button
-                        onClick={() => {
-                            localStorage.removeItem("currentUser");
-                            router.push("/login");
-                        }}
-                        style={{
-                            width: "100%",
-                            padding: "8px 12px",
-                            background: "#818384",
-                            color: "white",
-                            border: "none",
-                            borderRadius: "20px",
-                            cursor: "pointer",
-                            fontSize: "14px",
-                        }}
-                    >
-                        Logout
-                    </button>
+                    <Link href="/" style={{ textDecoration: "none" }}>
+                        <button
+                            style={{
+                                width: "100%",
+                                padding: "8px 12px",
+                                background: "#050816",
+                                color: "#e5e7eb",
+                                border: "1px solid #312e81",
+                                borderRadius: "8px",
+                                cursor: "pointer",
+                                marginBottom: "24px",
+                                fontSize: "14px",
+                            }}
+                        >
+                            ← Back to Feed
+                        </button>
+                    </Link>
+
                 </div>
             </div>
             <div className="app-main">
                 <div style={{ maxWidth: "800px", margin: "0 auto" }}>
                     <div
                         style={{
-                            background: "#1a1a1b",
-                            border: "1px solid #343536",
-                            borderRadius: "4px",
+                            background: "#020617",
+                            border: "1px solid #1f2937",
+                            borderRadius: "8px",
                             marginBottom: "24px",
                             display: "flex",
                         }}
@@ -214,8 +197,8 @@ export default function PostDetail() {
                                 flexDirection: "column",
                                 alignItems: "center",
                                 padding: "12px",
-                                background: "#272729",
-                                borderRadius: "4px 0 0 4px",
+                                background: "#050816",
+                                borderRadius: "8px 0 0 8px",
                                 minWidth: "50px",
                             }}
                         >
@@ -224,7 +207,7 @@ export default function PostDetail() {
                                 style={{
                                     background: "none",
                                     border: "none",
-                                    color: "#818384",
+                                    color: "#a855f7",
                                     cursor: "pointer",
                                     fontSize: "18px",
                                     padding: "6px",
@@ -234,7 +217,7 @@ export default function PostDetail() {
                             </button>
                             <span
                                 style={{
-                                    color: "#818384",
+                                    color: "#e5e7eb",
                                     fontSize: "12px",
                                     margin: "6px 0",
                                 }}
@@ -246,7 +229,7 @@ export default function PostDetail() {
                                 style={{
                                     background: "none",
                                     border: "none",
-                                    color: "#818384",
+                                    color: "#4b5563",
                                     cursor: "pointer",
                                     fontSize: "18px",
                                     padding: "6px",
@@ -259,7 +242,7 @@ export default function PostDetail() {
                             <div
                                 style={{
                                     fontSize: "12px",
-                                    color: "#818384",
+                                    color: "#9ca3af",
                                     marginBottom: "8px",
                                 }}
                             >
@@ -268,7 +251,7 @@ export default function PostDetail() {
                             </div>
                             <h1
                                 style={{
-                                    color: "#d7dadc",
+                                    color: "#f9fafb",
                                     fontSize: "20px",
                                     fontWeight: "700",
                                     marginBottom: "12px",
@@ -278,7 +261,7 @@ export default function PostDetail() {
                             </h1>
                             <p
                                 style={{
-                                    color: "#d7dadc",
+                                    color: "#e5e7eb",
                                     fontSize: "14px",
                                     lineHeight: "1.6",
                                     marginBottom: "16px",
@@ -289,42 +272,43 @@ export default function PostDetail() {
                             <div
                                 style={{
                                     fontSize: "12px",
-                                    color: "#818384",
+                                    color: "#9ca3af",
                                 }}
                             >
                                 {post.comments?.length || 0} Comments
                             </div>
-                            {post.author?._id === currentUser._id && (
-                                <button
-                                    onClick={handleDeletePost}
-                                    style={{
-                                        marginTop: "12px",
-                                        padding: "6px 12px",
-                                        background: "#d32f2f",
-                                        color: "white",
-                                        border: "none",
-                                        borderRadius: "4px",
-                                        cursor: "pointer",
-                                        fontSize: "12px",
-                                    }}
-                                >
-                                    Delete Post
-                                </button>
-                            )}
+                            {(post.author?._id === currentUser._id ||
+                                currentUser.username === "duuree") && (
+                                    <button
+                                        onClick={handleDeletePost}
+                                        style={{
+                                            marginTop: "12px",
+                                            padding: "6px 12px",
+                                            background: "#b91c1c",
+                                            color: "white",
+                                            border: "none",
+                                            borderRadius: "6px",
+                                            cursor: "pointer",
+                                            fontSize: "12px",
+                                        }}
+                                    >
+                                        Delete Post
+                                    </button>
+                                )}
                         </div>
                     </div>
                     <div
                         style={{
-                            background: "#1a1a1b",
-                            border: "1px solid #343536",
-                            borderRadius: "4px",
+                            background: "#020617",
+                            border: "1px solid #1f2937",
+                            borderRadius: "8px",
                             padding: "16px",
                             marginBottom: "24px",
                         }}
                     >
                         <h2
                             style={{
-                                color: "#d7dadc",
+                                color: "#f9fafb",
                                 fontSize: "16px",
                                 fontWeight: "600",
                                 marginBottom: "12px",
@@ -349,10 +333,10 @@ export default function PostDetail() {
                                 style={{
                                     width: "100%",
                                     padding: "12px",
-                                    background: "#272729",
-                                    color: "#d7dadc",
-                                    border: "1px solid #343536",
-                                    borderRadius: "4px",
+                                    background: "#050816",
+                                    color: "#e5e7eb",
+                                    border: "1px solid #1f2937",
+                                    borderRadius: "8px",
                                     fontSize: "14px",
                                     minHeight: "80px",
                                     boxSizing: "border-box",
@@ -365,10 +349,10 @@ export default function PostDetail() {
                                 disabled={submitting}
                                 style={{
                                     padding: "8px 16px",
-                                    background: "#818384",
+                                    background: "#7c3aed",
                                     color: "white",
                                     border: "none",
-                                    borderRadius: "20px",
+                                    borderRadius: "999px",
                                     cursor: submitting
                                         ? "not-allowed"
                                         : "pointer",
@@ -384,7 +368,7 @@ export default function PostDetail() {
                     <div>
                         <h2
                             style={{
-                                color: "#d7dadc",
+                                color: "#f9fafb",
                                 fontSize: "16px",
                                 fontWeight: "600",
                                 marginBottom: "12px",
@@ -397,9 +381,9 @@ export default function PostDetail() {
                                 <div
                                     key={idx}
                                     style={{
-                                        background: "#1a1a1b",
-                                        border: "1px solid #343536",
-                                        borderRadius: "4px",
+                                        background: "#020617",
+                                        border: "1px solid #1f2937",
+                                        borderRadius: "8px",
                                         padding: "12px",
                                         marginBottom: "12px",
                                     }}
@@ -407,7 +391,7 @@ export default function PostDetail() {
                                     <div
                                         style={{
                                             fontSize: "12px",
-                                            color: "#818384",
+                                            color: "#9ca3af",
                                             marginBottom: "8px",
                                         }}
                                     >
@@ -415,7 +399,7 @@ export default function PostDetail() {
                                     </div>
                                     <p
                                         style={{
-                                            color: "#d7dadc",
+                                            color: "#e5e7eb",
                                             fontSize: "14px",
                                             lineHeight: "1.5",
                                         }}
@@ -427,7 +411,7 @@ export default function PostDetail() {
                         ) : (
                             <div
                                 style={{
-                                    color: "#818384",
+                                    color: "#9ca3af",
                                     fontSize: "14px",
                                 }}
                             >

@@ -5,17 +5,40 @@ import { useState } from "react";
 
 export default function LoginPage() {
   const router = useRouter();
-  const [selectedUser, setSelectedUser] = useState(null);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const users = ["EMI", "DUUREE", "MARALA", "CELMOON"];
+  const allowedUsers = ["emi", "duuree", "marala", "celmoon"];
 
-  const handleLogin = async (username) => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    const rawName = username.trim();
+    const normalized = rawName.toLowerCase();
+
+    if (!rawName) {
+      setError("Enter a username");
+      return;
+    }
+
+    if (!allowedUsers.includes(normalized)) {
+      setError("Unknown user. Please try again.");
+      return;
+    }
+
+    if (normalized === "duuree" && password !== "ceo123") {
+      setError("Incorrect password for duuree.");
+      return;
+    }
+
     setLoading(true);
     try {
       const response = await fetch("/api/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username }),
+        body: JSON.stringify({ username: normalized }),
       });
 
       const data = await response.json();
@@ -29,101 +52,134 @@ export default function LoginPage() {
   };
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        background:
-          "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-      }}
-    >
+    <div className="app-shell" style={{ justifyContent: "center" }}>
       <div
         style={{
-          background: "white",
+          background: "#111827",
           borderRadius: "12px",
-          padding: "60px 40px",
-          boxShadow: "0 20px 60px rgba(0,0,0,0.3)",
+          padding: "40px 32px",
+          boxShadow: "0 18px 40px rgba(0,0,0,0.5)",
           textAlign: "center",
-          maxWidth: "500px",
-          width: "90%",
+          maxWidth: "420px",
+          width: "100%",
+          border: "1px solid #1f2937",
         }}
       >
         <h1
           style={{
-            fontSize: "36px",
+            fontSize: "28px",
             marginBottom: "10px",
-            color: "#333",
+            color: "#e5e7eb",
           }}
         >
-          Team Reddit
+          Surii Discussions
         </h1>
         <p
           style={{
-            color: "#666",
-            marginBottom: "40px",
+            color: "#9ca3af",
+            marginBottom: "24px",
             fontSize: "14px",
           }}
         >
-          Select your account to continue
+          Нэрээ бич. <strong>Заваан амьтан минь.</strong>.
         </p>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(2, 1fr)",
-            gap: "15px",
-            marginBottom: "30px",
-          }}
-        >
-          {users.map((user) => (
-            <button
-              key={user}
-              onClick={() => setSelectedUser(user)}
+        <form onSubmit={handleLogin} style={{ textAlign: "left" }}>
+          <div style={{ marginBottom: "16px" }}>
+            <label
               style={{
-                padding: "15px",
-                borderRadius: "8px",
-                border:
-                  selectedUser === user
-                    ? "3px solid #667eea"
-                    : "2px solid #ddd",
-                background:
-                  selectedUser === user ? "#f0f4ff" : "white",
-                cursor: "pointer",
-                fontSize: "16px",
-                fontWeight: "600",
-                color: "#333",
-                transition: "all 0.3s ease",
+                display: "block",
+                fontSize: "13px",
+                fontWeight: 600,
+                color: "#555",
+                marginBottom: "6px",
               }}
             >
-              @{user}
-            </button>
-          ))}
-        </div>
+              Username
+            </label>
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Нэрээ оруулна уу"
+              style={{
+                width: "100%",
+                padding: "10px 12px",
+                color: "#e5e7eb",
+                borderRadius: "8px",
+                border: "1px solid #374151",
+                fontSize: "14px",
+                textTransform: "lowercase",
+                boxSizing: "border-box",
+                backgroundColor: "#020617",
+              }}
+            />
+          </div>
 
-        <button
-          onClick={() => selectedUser && handleLogin(selectedUser)}
-          disabled={!selectedUser || loading}
-          style={{
-            width: "100%",
-            padding: "12px",
-            background:
-              selectedUser && !loading ? "#667eea" : "#ccc",
-            color: "white",
-            border: "none",
-            borderRadius: "8px",
-            fontSize: "16px",
-            fontWeight: "600",
-            cursor:
-              selectedUser && !loading
-                ? "pointer"
-                : "not-allowed",
-            transition: "background 0.3s ease",
-          }}
-        >
-          {loading ? "Logging in..." : "Login"}
-        </button>
+          {username === "duuree" && (
+            <div style={{ marginBottom: "12px" }}>
+              <label
+                style={{
+                  display: "block",
+                  fontSize: "13px",
+                  fontWeight: 600,
+                  color: "#555",
+                  marginBottom: "6px",
+                }}
+              >
+                Password ()
+              </label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Та захирал биш бол Код шаардлагагүй."
+                style={{
+                  width: "100%",
+                  padding: "10px 12px",
+                  color: "#e5e7eb",
+                  borderRadius: "8px",
+                  border: "1px solid #374151",
+                  fontSize: "14px",
+                  boxSizing: "border-box",
+                  backgroundColor: "#020617",
+                }}
+              />
+            </div>
+          )}
+
+          {error && (
+            <p
+              style={{
+                color: "#fca5a5",
+                fontSize: "13px",
+                marginBottom: "12px",
+              }}
+            >
+              {error}
+            </p>
+          )}
+
+          <button
+            type="submit"
+            disabled={loading}
+            style={{
+              width: "100%",
+              padding: "12px",
+              background: loading ? "#4b5563" : "#4f46e5",
+              color: "white",
+              border: "none",
+              borderRadius: "8px",
+              fontSize: "16px",
+              fontWeight: "600",
+              cursor: loading ? "not-allowed" : "pointer",
+              transition: "background 0.3s ease",
+              marginTop: "8px",
+            }}
+          >
+            {loading ? "Logging in..." : "Login"}
+          </button>
+        </form>
       </div>
     </div>
   );
