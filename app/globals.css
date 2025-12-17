@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Simple layout helpers for Reddit-style shell */
+
+.app-shell {
+    display: flex;
+    min-height: 100vh;
+    background: #030303;
+}
+
+.app-sidebar {
+    width: 280px;
+    background: #1a1a1b;
+    border-right: 1px solid #343536;
+    padding: 16px;
+    overflow-y: auto;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
+
+.app-main {
+    flex: 1;
+    padding: 16px;
+}
+
+@media (max-width: 768px) {
+    .app-shell {
+        flex-direction: column;
+    }
+
+    .app-sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+        border-right: none;
+        border-bottom: 1px solid #343536;
+    }
+
+    .app-main {
+        padding: 12px;
+    }
+}
